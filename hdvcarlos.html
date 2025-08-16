@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio - Desarrollo Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF3E00; /* Naranja neobrutalista */
+            --secondary: #3A0CA3; /* Azul vibrante */
+            --accent: #FFD700; /* Amarillo */
+            --dark: #000000;
+            --light: #FFFFFF;
+            --gray: #6B7280;
+            --bg-pattern: repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.03),
+                rgba(0, 0, 0, 0.03) 10px,
+                rgba(0, 0, 0, 0.05) 10px,
+                rgba(0, 0, 0, 0.05) 20px
+            );
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.4;
+            background-image: var(--bg-pattern);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--light);
+            border-bottom: 4px solid var(--dark);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+            letter-spacing: 1px;
+            transform: rotate(-2deg);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 16px;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 0 var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(-1deg);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background-color: var(--accent);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .hero-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 15px 35px;
+            border: 4px solid var(--dark);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            transform: rotate(-1deg);
+            box-shadow: 8px 8px 0 var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: rotate(0) translateY(-5px);
+            box-shadow: 12px 12px 0 var(--dark);
+        }
+
+        .btn:active {
+            transform: rotate(1deg) translateY(0);
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+
+        /* Perfil en línea */
+        .profile-inline {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-frame-inline {
+            width: 220px;
+            height: 220px;
+            border: 4px solid var(--dark);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+            transform: rotate(3deg);
+            position: relative;
+            overflow: hidden;
+            background-color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .profile-frame-inline::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--secondary),
+                var(--secondary) 5px,
+                var(--primary) 5px,
+                var(--primary) 10px
+            );
+            z-index: -1;
+            transform: rotate(-5deg);
+        }
+
+        .profile-image-inline {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid var(--dark);
+            transform: rotate(-2deg);
+        }
+
+        .profile-label-inline {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            color: var(--dark);
+            background-color: var(--light);
+            border: 3px solid var(--dark);
+            padding: 5px 15px;
+            transform: rotate(-2deg);
+            box-shadow: 4px 4px 0 var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-label-inline::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--accent);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        /* Indicador de flechas */
+        .arrow-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+
+        .arrow-indicator i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: -10px 0;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--light);
+            border-top: 4px solid var(--dark);
+            border-bottom: 4px solid var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-color: var(--accent);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .section-title p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-weight: 700;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            padding: 40px 30px;
+            border: 4px solid var(--dark);
+            text-align: center;
+            transition: all 0.2s;
+            transform: rotate(-1deg);
+            box-shadow: 10px 10px 0 var(--dark);
+            position: relative;
+        }
+
+        .service-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .service-card:hover {
+            transform: rotate(0) translateY(-10px);
+            box-shadow: 15px 15px 0 var(--dark);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            background-color: var(--light);
+            border: 4px solid var(--dark);
+            overflow: hidden;
+            transition: all 0.2s;
+            transform: rotate(-1deg);
+            box-shadow: 10px 10px 0 var(--dark);
+            position: relative;
+        }
+
+        .portfolio-item:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .portfolio-item:hover {
+            transform: rotate(0) translateY(-10px);
+            box-shadow: 15px 15px 0 var(--dark);
+        }
+
+        .portfolio-preview {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 4px solid var(--dark);
+        }
+
+        .portfolio-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-item:hover .portfolio-preview img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 20px;
+        }
+
+        .portfolio-info h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .portfolio-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--dark);
+            background-color: var(--light);
+            color: var(--secondary);
+            transition: all 0.2s;
+            font-size: 1.5rem;
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+
+        .portfolio-links a:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 0 var(--dark);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            border: 3px solid var(--dark);
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+
+        .status-active {
+            background-color: #4ADE80;
+            color: var(--dark);
+        }
+
+        .status-inactive {
+            background-color: #F87171;
+            color: var(--dark);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--light);
+            border: 6px solid var(--dark);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            box-shadow: 20px 20px 0 rgba(0, 0, 0, 0.3);
+            transform: rotate(-1deg);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            z-index: 1001;
+            background-color: var(--light);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--dark);
+            box-shadow: 4px 4px 0 var(--dark);
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 4px solid var(--dark);
+        }
+
+        .modal-header h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .slider {
+            position: relative;
+            margin-bottom: 30px;
+            border: 4px solid var(--dark);
+            box-shadow: 8px 8px 0 var(--dark);
+        }
+
+        .slides {
+            display: flex;
+            overflow: hidden;
+            border-radius: 0;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 400px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+
+        .slider-nav button {
+            background-color: var(--light);
+            border: 3px solid var(--dark);
+            border-radius: 0;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: all 0.2s;
+            box-shadow: 4px 4px 0 var(--dark);
+        }
+
+        .slider-nav button:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 0 var(--dark);
+        }
+
+        #projectDescription {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-status {
+            background-color: #FEE;
+            border: 4px solid var(--dark);
+            color: var(--dark);
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 8px 8px 0 var(--dark);
+            transform: rotate(-1deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 60px 0 30px;
+            border-top: 8px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--accent);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .footer-column p, .footer-column li {
+            margin-bottom: 15px;
+            color: #ddd;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--primary);
+            background-color: transparent;
+            color: var(--primary);
+            transition: all 0.2s;
+            font-size: 1.5rem;
+            box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 3px solid #444;
+            color: #aaa;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .profile-frame-inline {
+                width: 180px;
+                height: 180px;
+            }
+
+            .arrow-indicator {
+                margin-top: 20px;
+                align-self: center;
+            }
+
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 3rem;
+            }
+
+            .services-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .profile-frame-inline {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">MiPortafolio.dev</div>
+                <ul class="nav-links">
+                    <li><a href="#about">Sobre Mí</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#portfolio">Portafolio</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-top">
+                    <div class="hero-text">
+                        <h1>Diseño y Desarrollo <span>Web para Crecer</span></h1>
+                        <p>Creador de experiencias digitales atractivas y funcionales que impulsan resultados tangibles para negocios y marcas.</p>
+                        
+                        <div class="hero-bottom">
+                            <a href="#portfolio" class="btn">Ver mi trabajo</a>
+                            
+                            <!-- Perfil en línea -->
+                            <div class="profile-inline">
+                                <div class="profile-frame-inline">
+                                    <!-- Reemplaza esta URL con tu imagen -->
+                                    <img src="imgs/cz.jpg" alt="Foto de perfil" class="profile-image-inline">
+                                </div>
+                                <div class="profile-label-inline">Carlos Zipa</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicador de flechas -->
+                    <div class="arrow-indicator">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que puedo hacer por ti</h2>
+                <p>Ofrezco soluciones integrales para tu presencia digital con enfoque en resultados</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Creación de sitios web modernos, rápidos y responsivos con las últimas tecnologías y estándares.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Maquetado basado en Diseños UX/UI</h3>
+                    <p>Maquetado de interfaces intuitivas y experiencias de usuario que cautivan y convierten visitantes en clientes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Optimización SEO</h3>
+                    <p>Mejora del posicionamiento en buscadores para aumentar la visibilidad y el tráfico orgánico de tu sitio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mis Proyectos Recientes</h2>
+                <p>Algunos de los trabajos en los que he tenido la oportunidad de colaborar</p>
+            </div>
+            <div class="portfolio-grid">
+                <!-- Proyecto 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/Alimentos-doriaF.webp" alt="Alimentos Doria">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Alimentos Doria</h3>
+                        <p>Sitio web corporativo para empresa de alimentos</p>
+                        <div class="portfolio-links">
+                            <a href="https://alimentosdoria.com" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="alimentosdoria" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/PinillarF.webp" alt="Arroz Pinillar">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Arroz Pinillar</h3>
+                        <p>Tienda online para productor de arroz</p>
+                        <div class="portfolio-links">
+                            <a href="https://arrozpinillar.com.co" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="arrozpinillar" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/SonoraF.webp" alt="Arroz Sonora">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Arroz Sonora</h3>
+                        <p>Plataforma online para venta de arroz</p>
+                        <div class="portfolio-links">
+                            <a href="https://arrozsonora.com.co" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="arrozsonora" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/ComarricoF.webp" alt="Comarrico">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Comarrico</h3>
+                        <p>Portal web para empresa de pastas</p>
+                        <div class="portfolio-links">
+                            <a href="https://comarrico.com" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="comarrico" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/AndescoF.webp" alt="Andesco">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Andesco</h3>
+                        <p>Sitio institucional para asociación empresarial</p>
+                        <div class="portfolio-links">
+                            <a href="https://andesco.org.co" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="andesco" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 6 - Inactivo -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/QuakerF.webp" alt="Quaker">
+                        <span class="status-badge status-inactive">Inactivo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Quaker</h3>
+                        <p>Diseño de sitio multinalcional de alimentos</p>
+                        <div class="portfolio-links">
+                            <a href="#" class="view-details" data-project="quaker" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 7 - Inactivo -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <img src="imgs/Nuestra-HistoriaF.webp" alt="Nuestra Historia">
+                        <span class="status-badge status-inactive">Inactivo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Nuestra Historia</h3>
+                        <p>Micrositio interactivo para proyecto cultural </p>
+                        <div class="portfolio-links">
+                            <a href="#" class="view-details" data-project="nuestrahistoria" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Mí</h3>
+                    <p>Maquetador y desarrollador web con experiencia en la creación de experiencias digitales efectivas y atractivas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#about">Sobre Mí</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#portfolio">Portafolio</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-envelope"></i> carlosandreszipa@gmail.com</p>
+                    <!--<p><i class="fas fa-phone"></i> +57 300 123 4567</p>-->
+                    <p><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Derechos reservados Carlos Zipa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para todos los proyectos -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Título del Proyecto</h2>
+            </div>
+            <div class="modal-body">
+                <div class="slider">
+                    <div class="slides" id="projectSlides">
+                        <!-- Las imágenes se cargarán dinámicamente -->
+                    </div>
+                    <div class="slider-nav">
+                        <button id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+                        <button id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div id="projectDescription">
+                    <p>Descripción del proyecto...</p>
+                </div>
+                <div class="project-status" id="projectStatus" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i> Este proyecto ya no está disponible en línea
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de todos los proyectos
+        const allProjects = {
+            alimentosdoria: {
+                title: "Alimentos Doria",
+                description: "Sitio web corporativo para empresa de alimentos con diseño moderno y funcional. Incluye catálogo de productos, sección de recetas y blog de nutrición.",
+                images: [
+                    "imgs/Alimentos-doria1.webp",
+                    "imgs/Alimentos-doria2.webp",
+                    "imgs/Alimentos-doria3.webp"
+                ],
+                status: "active",
+                url: "https://alimentosdoria.com"
+            },
+            arrozpinillar: {
+                title: "Arroz Pinillar",
+                description: "Tienda online para productor de arroz con sistema de pedidos, pasarela de pago y sección de recetas para los clientes.",
+                images: [
+                    "imgs/Pinillar1.webp",
+                    "imgs/Pinillar2.webp",
+                    "imgs/Pinillar3.webp"
+                ],
+                status: "active",
+                url: "https://arrozpinillar.com.co"
+            },
+            arrozsonora: {
+                title: "Arroz Sonora",
+                description: "Plataforma e-commerce completa para venta de arroz con inventario integrado, sistema de envíos y panel de administración.",
+                images: [
+                    "imgs/Sonora1.webp",
+                    "imgs/Sonora2.webp",
+                    "imgs/Sonora3.webp"
+                ],
+                status: "active",
+                url: "https://arrozsonora.com.co"
+            },
+            comarrico: {
+                title: "Comarrico",
+                description: "Portal web para empresa de servicios con presentación de proyectos, equipo de trabajo y formulario de contacto.",
+                images: [
+                    "imgs/Comarrico1.webp",
+                    "imgs/Comarrico2.webp",
+                    "imgs/Comarrico3.webp"
+                ],
+                status: "active",
+                url: "https://comarrico.com"
+            },
+            andesco: {
+                title: "Andesco",
+                description: "Sitio institucional para asociación empresarial con noticias, eventos, miembros y área privada para asociados.",
+                images: [
+                    "imgs/Andesco1.webp",
+                    "imgs/Andesco2.webp",
+                    "imgs/Andesco3.webp"
+                ],
+                status: "active",
+                url: "https://andesco.org.co"
+            },
+            quaker: {
+                title: "Quaker",
+                description: "Landing page diseñada para campaña de marketing digital de Quaker. Incluye secciones interactivas y animaciones para mejorar la experiencia del usuario.",
+                images: [
+                    "imgs/Quaker1.webp",
+                    "imgs/Quaker2.webp",
+                    "imgs/Quaker3.webp"
+                ],
+                status: "inactive"
+            },
+            nuestrahistoria: {
+                title: "Nuestra Historia",
+                description: "Micrositio interactivo para proyecto cultural que narra la historia de una comunidad a través de multimedia y elementos visuales atractivos.",
+                images: [
+                    "imgs/Nuestra-Historia1.webp",
+                    "imgs/Nuestra-Historia2.webp",
+                    "imgs/Nuestra-Historia3.webp"
+                ],
+                status: "inactive"
+            }
+        };
+
+        // Funcionalidad del modal
+        const modal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const projectSlides = document.getElementById('projectSlides');
+        const projectDescription = document.getElementById('projectDescription');
+        const projectStatus = document.getElementById('projectStatus');
+        const closeBtn = document.querySelector('.modal-close');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        
+        let currentSlide = 0;
+
+        // Abrir modal al hacer clic en detalles de cualquier proyecto
+        document.querySelectorAll('.view-details').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectId = this.getAttribute('data-project');
+                
+                if (allProjects[projectId]) {
+                    const project = allProjects[projectId];
+                    
+                    modalTitle.textContent = project.title;
+                    projectDescription.innerHTML = `<p>${project.description}</p>`;
+                    
+                    // Mostrar u ocultar mensaje de estado según el proyecto
+                    if (project.status === 'inactive') {
+                        projectStatus.style.display = 'block';
+                    } else {
+                        projectStatus.style.display = 'none';
+                    }
+                    
+                    // Cargar imágenes del slider
+                    projectSlides.innerHTML = '';
+                    project.images.forEach(image => {
+                        const slide = document.createElement('div');
+                        slide.className = 'slide';
+                        slide.innerHTML = `<img src="${image}" alt="${project.title}">`;
+                        projectSlides.appendChild(slide);
+                    });
+                    
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                    
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Navegación del slider
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+            });
+        }
+
+        prevBtn.addEventListener('click', function() {
+            currentSlide--;
+            showSlide(currentSlide);
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentSlide++;
+            showSlide(currentSlide);
+        });
+
+        // Smooth scrolling para enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
