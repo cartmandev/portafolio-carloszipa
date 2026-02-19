@@ -576,6 +576,7 @@
 
         .slide {
             min-width: 100%;
+            transition: transform 0.5s ease-in-out;
             height: 400px;
         }
 
@@ -876,6 +877,33 @@
                 <p>Algunos de los trabajos en los que he tenido la oportunidad de colaborar</p>
             </div>
             <div class="portfolio-grid">
+                <!-- ============================================= -->
+                <!-- NUEVO PROYECTO AÑADIDO - INICIO -->
+                <!-- ============================================= -->
+                <div class="portfolio-item">
+                    <div class="portfolio-preview">
+                        <!-- Reemplaza esta imagen -->
+                        <img src="imgs/golf-preview.webp" alt="Federación Colombiana de Golf">
+                        <span class="status-badge status-active">Activo</span>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Federación Colombiana de Golf</h3>
+                        <p>Sitio web oficial para la federación deportiva</p>
+                        <div class="portfolio-links">
+                             <!-- Reemplaza esta URL -->
+                            <a href="https://fede.golf/" target="_blank" title="Visitar sitio">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="view-details" data-project="federaciongolf" title="Ver detalles">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================= -->
+                <!-- NUEVO PROYECTO AÑADIDO - FIN -->
+                <!-- ============================================= -->
+                
                 <!-- Proyecto 1 -->
                 <div class="portfolio-item">
                     <div class="portfolio-preview">
@@ -1079,6 +1107,23 @@
     <script>
         // Datos de todos los proyectos
         const allProjects = {
+            // =============================================
+            // NUEVO PROYECTO AÑADIDO - INICIO
+            // =============================================
+            federaciongolf: {
+                title: "Federación Colombiana de Golf",
+                description: "Desarrollo del portal web oficial para la Federación Colombiana de Golf, incluyendo sistema de noticias, calendario de eventos y resultados de torneos.",
+                images: [
+                    "imgs/golf1.webp",      // Reemplaza esta imagen
+                    "imgs/golf2.webp",      // Reemplaza esta imagen
+                    "imgs/golf3.webp"       // Reemplaza esta imagen
+                ],
+                status: "active",
+                url: "https://fede.golf/"
+            },
+            // =============================================
+            // NUEVO PROYECTO AÑADIDO - FIN
+            // =============================================
             alimentosdoria: {
                 title: "Alimentos Doria",
                 description: "Sitio web corporativo para empresa de alimentos con diseño moderno y funcional. Incluye catálogo de productos, sección de recetas y blog de nutrición.",
@@ -1220,23 +1265,27 @@
 
         // Navegación del slider
         function showSlide(index) {
-            const slides = document.querySelectorAll('.slide');
-            if (index >= slides.length) currentSlide = 0;
-            if (index < 0) currentSlide = slides.length - 1;
+            const slides = document.querySelectorAll('#projectSlides .slide');
+            const totalSlides = slides.length;
             
-            slides.forEach((slide, i) => {
-                slide.style.transform = `translateX(-${currentSlide * 100}%)`;
-            });
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+            
+            projectSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
+
         prevBtn.addEventListener('click', function() {
-            currentSlide--;
-            showSlide(currentSlide);
+            showSlide(currentSlide - 1);
         });
 
         nextBtn.addEventListener('click', function() {
-            currentSlide++;
-            showSlide(currentSlide);
+            showSlide(currentSlide + 1);
         });
 
         // Smooth scrolling para enlaces de navegación
@@ -1255,5 +1304,6 @@
     </script>
 </body>
 </html>
+
 
 
