@@ -566,17 +566,18 @@
             margin-bottom: 30px;
             border: 4px solid var(--dark);
             box-shadow: 8px 8px 0 var(--dark);
+            overflow: hidden; /* <-- AÑADIDO PARA ASEGURAR QUE NO SE DESBORDE */
         }
 
         .slides {
             display: flex;
-            overflow: hidden;
             border-radius: 0;
+            transition: transform 0.4s ease-in-out; /* <-- CAMBIO CLAVE AQUÍ: LA TRANSICIÓN VA EN EL CONTENEDOR */
         }
 
         .slide {
             min-width: 100%;
-            transition: transform 0.5s ease-in-out;
+            /* transition: transform 0.5s ease-in-out; */ /* <-- ESTA LÍNEA SE ELIMINA DE AQUÍ */
             height: 400px;
         }
 
@@ -1229,14 +1230,12 @@
                     modalTitle.textContent = project.title;
                     projectDescription.innerHTML = `<p>${project.description}</p>`;
                     
-                    // Mostrar u ocultar mensaje de estado según el proyecto
                     if (project.status === 'inactive') {
                         projectStatus.style.display = 'block';
                     } else {
                         projectStatus.style.display = 'none';
                     }
                     
-                    // Cargar imágenes del slider
                     projectSlides.innerHTML = '';
                     project.images.forEach(image => {
                         const slide = document.createElement('div');
@@ -1255,21 +1254,22 @@
         });
 
         // Cerrar modal
-        closeBtn.addEventListener('click', function() {
+        function closeModal() {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-        });
+        }
 
+        closeBtn.addEventListener('click', closeModal);
         window.addEventListener('click', function(e) {
             if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                closeModal();
             }
         });
 
         // Navegación del slider
         function showSlide(index) {
-            const slides = document.querySelectorAll('#projectSlides .slide');
+            const slidesContainer = document.getElementById('projectSlides');
+            const slides = slidesContainer.querySelectorAll('.slide');
             const totalSlides = slides.length;
             
             if (index >= totalSlides) {
@@ -1280,9 +1280,9 @@
                 currentSlide = index;
             }
             
-            projectSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            const offset = -currentSlide * 100;
+            slidesContainer.style.transform = `translateX(${offset}%)`;
         }
-
 
         prevBtn.addEventListener('click', function() {
             showSlide(currentSlide - 1);
@@ -1308,8 +1308,5 @@
     </script>
 </body>
 </html>
-
-
-
 
 
